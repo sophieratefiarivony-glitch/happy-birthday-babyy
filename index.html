@@ -101,9 +101,9 @@
 </div>
 
 <script>
-// typed effect
+
 const messageLines = [
-  "A tes 23 ans mon coeurr !! Et mitomboho fahendrena sy fahaizana foana (de romantisme ampitomboina de ny bototo prime ahenaaa) Bisouusss"
+  "A tes 23 ans mon coeurr !! Et mitomboho fahendrena sy fahaizana foana (de romantisme kely koa)"
 ];
 const out = document.getElementById('typed');
 async function runTyped(){
@@ -119,7 +119,6 @@ async function runTyped(){
 }
 runTyped();
 
-// confetti canvas
 const canvas = document.getElementById('confetti');
 const ctx = canvas.getContext('2d');
 let W = canvas.width = innerWidth;
@@ -157,7 +156,7 @@ function draw(){
 }
 draw();
 
-// Appuie le petit boutonn
+
 document.getElementById('run').addEventListener('click', async ()=>{
   const btn = document.getElementById('run');
   btn.disabled = true;
