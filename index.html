@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Joyeux Anniversaire mon coeurr ❤️</title>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Scirpt&Family=Poppins:wght@400;600&display=swap" rel="stylesheet"
+<style>
+  <style>
+  html, body {
+    height: 100%;
+    margin: 0;
+    font-family: font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background: #b3d8f5; 
+    color: #0a1a2a; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .card {
+    width: 70vw;
+    max-width: 700px;
+    padding: 25px;
+    margin-top: 20px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.6);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    z-index: 1;
+  }
+  h1 {
+    margin: 0 0 10px;
+    font-size: 2.4rem;
+    color: #0a1a2a;
+  }
+  p {
+    margin: 8px 0;
+    font-size: 1.1rem;
+    color: #11253b;
+  }
+  #typed {
+    font-family: monospace;
+    font-size: 1rem;
+    color: #0a1a2a;
+    white-space: pre-wrap;
+  }
+  button {
+    margin-top: 18px;
+    padding: 10px 18px;
+    border-radius: 8px;
+    border: none;
+    background: #0a1a2a;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  button:hover {
+    background: #16375a;
+  }
+  .small {
+    font-size: 0.85rem;
+    color: #334b68;
+    margin-top: 10px;
+  }
+  canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+</style>
+</style>
+</head>
+<body>
+<canvas id="confetti"></canvas>
+<div class="card">
+  <h1>Joyeux Anniversaire mon coeurr ❤️</h1>
+  <p>Je te souhaite tout le bonheur du monde (même si ton bonheur c'est déjà moi), 
+    Tu vas réussir cette dernière année et tu vas rester ici et devenir français.
+  Ensuite on se mariera et on aura des enfantss ensemblee 👫.
+ </p>Merci Jésus de t'avoir mis sur mon chemin et j'espère que cette année tu
+ auras plus confiance en toi parce que tu es quelqu'un d'incroyable, d'intelligent, 
+ de talentueux, de drôle aussi; 
+ et je t'aime beaucoup beaucoup ❤️.
+ Je t'aime très fort, j'aime tout ton corps, tes muscles durs que je peux pas pincer, 
+ tes cheveux que je tresse, même tes pieds qui puent et qui à chaque fois sont martyrisés mdr.
+ J'aime aussi le fait que tu sois compétitif, que tu aies de la compassion envers les autres
+ (même pour un golem de fer mdrr), et que malgré toutt ton stress tu te forces à ne pas abandonner.
+ Et d'ailleurs,  j'espère que cette année tu gèreras mieux ton anxiété 
+ (parce que t'aimes pas quand je dis c'est du stress)
+ parce que tu peux passer à côté de moments dans ta vie si tu la passes à trop penser.
+ Et voilà je crois,
+ Je t'aime très fort et amin'ny anniversaire manaraka ndrayyy.
+ Bon tu t'es déjà donné ton propre cadeau et je me sens un peu nulle pour ça mais bon...
+ Gros bisous et encore une fois je t'aimeee ❤️
+  <pre id="typed"></pre>
+   <div class="small">Clique sur le bouton huhuu</div>
+  <button id="run">A tes 23 ans 🎂</button>
+</div>
+
+<script>
+// typed effect
+const messageLines = [
+  "A tes 23 ans mon coeurr !! Et mitomboho fahendrena sy fahaizana foana (de romantisme kely koa)"
+];
+const out = document.getElementById('typed');
+async function runTyped(){
+  out.textContent = '';
+  for(let line of messageLines){
+    for(let i=0;i<line.length;i++){
+      out.textContent += line[i];
+      await new Promise(r=>setTimeout(r, 30));
+    }
+    out.textContent += '\n';
+    await new Promise(r=>setTimeout(r, 350));
+  }
+}
+runTyped();
+
+// confetti canvas
+const canvas = document.getElementById('confetti');
+const ctx = canvas.getContext('2d');
+let W = canvas.width = innerWidth;
+let H = canvas.height = innerHeight;
+window.addEventListener('resize',()=>{W=canvas.width=innerWidth;H=canvas.height=innerHeight;});
+
+const pieces = [];
+for (let i = 0; i < 150; i++) {
+  pieces.push({
+    x: Math.random()*W,
+    y: Math.random()*H - H,
+    r: 6+Math.random()*6,
+    d: Math.random()*Math.PI*2,
+    vx: -2 + Math.random()*4,
+    vy: 2 + Math.random()*6,
+    color: ['#ff6b6b','#ffd166','#6bf178','#6bd0ff','#c495ff'][Math.floor(Math.random()*5)]
+  });
+}
+
+function draw(){
+  ctx.clearRect(0,0,W,H);
+  for(let p of pieces){
+    ctx.beginPath();
+    ctx.fillStyle = p.color;
+    ctx.ellipse(p.x,p.y,p.r,p.r/1.6,p.d,0,Math.PI*2);
+    ctx.fill();
+    p.x += p.vx;
+    p.y += p.vy;
+    p.d += 0.1;
+    if(p.y>H+20){ p.y = -20; p.x = Math.random()*W; }
+    if(p.x>W+20) p.x = -20;
+    if(p.x<-20) p.x = W+20;
+  }
+  requestAnimationFrame(draw);
+}
+draw();
+
+// Appuie le petit boutonn
+document.getElementById('run').addEventListener('click', async ()=>{
+  const btn = document.getElementById('run');
+  btn.disabled = true;
+  btn.textContent = 'Entraînement en cours... 🔁';
+  for(let i=0;i<=100;i+=10){
+    btn.textContent = `Entraînement... ${i}%`;
+    await new Promise(r=>setTimeout(r, 150));
+  }
+  btn.textContent = 'Évaluation...';
+  await new Promise(r=>setTimeout(r, 700));
+  btn.textContent = 'Résultat : Que du bonheur et je t"aime forttt';
+  setTimeout(()=>{ btn.disabled = false; btn.textContent = 'A tes 23 ans 🎂'; }, 1200);
+});
+</script>
+</body>
+</html>
